@@ -3,6 +3,27 @@ import java.util.HashMap;
 
 public class Lock {
 
+    /**
+     locking -> how the lock is done
+
+     if(Lock.CachedhasLock(lockkey)) {
+        synchronized (Lock.getLock(lockkey).getLock()) {
+            //do
+        }
+     } else {
+        if (Lock.hasLock(lockkey)) {
+            synchronized (Lock.getLock(lockkey).getLock()) {
+                //do
+                Lock.AckLock(lockkey);
+            }
+        } else {
+            synchronized (Lock.getPublicLock()) {
+                //do
+            }
+        }
+     }
+     */
+
     public static ArrayList<String> list = new ArrayList<>();
     private static HashMap<String, LocalLock> map = new HashMap<>();
     private final static LocalLock sync = new LocalLock("public");
