@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class lock {
+public class Lock {
 
     public static ArrayList<String> list = new ArrayList<>();
-    private static HashMap<String, locallock> map = new HashMap<>();
-    private final static locallock sync = new locallock("public");
+    private static HashMap<String, LocalLock> map = new HashMap<>();
+    private final static LocalLock sync = new LocalLock("public");
 
-    public static locallock getLock(String key) {
+    public static LocalLock getLock(String key) {
         if(!map.containsKey(key)) {
-            map.put(key, new locallock(key));
+            map.put(key, new LocalLock(key));
             return sync;
         }
         return map.get(key);

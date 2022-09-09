@@ -1,10 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
-public class main {
+public class Main {
 
 
     private static final Object sync = new Object();
@@ -23,7 +17,7 @@ public class main {
 
     public static void main(String[] args) {
         try {
-            synchronized (lock.getLock("final").getLock()) {
+            synchronized (Lock.getLock("final").getLock()) {
             Process(3566864);
             }
             Thread.sleep(1000);
@@ -38,15 +32,15 @@ public class main {
             for(int i = 1; i <= 100; i++) {
                 final int x = i;
                 new Thread(() -> {
-                    if(lock.CachedhasLock("yes")) {
-                        synchronized (lock.getLock("yes").getLock()) {
+                    if(Lock.CachedhasLock("yes")) {
+                        synchronized (Lock.getLock("yes").getLock()) {
                             Process(x);
                         }
                     } else {
-                        if (lock.hasLock("yes")) {
-                            synchronized (lock.getLock("yes").getLock()) {
+                        if (Lock.hasLock("yes")) {
+                            synchronized (Lock.getLock("yes").getLock()) {
                                 Process(x);
-                                lock.AckLock("yes");
+                                Lock.AckLock("yes");
                             }
                         } else {
                             synchronized (sync) {
@@ -64,15 +58,15 @@ public class main {
             for(int i = 1; i <= 100; i++) {
                 final int x = i;
                 new Thread(() -> {
-                    if(lock.CachedhasLock("no")) {
-                        synchronized (lock.getLock("no").getLock()) {
+                    if(Lock.CachedhasLock("no")) {
+                        synchronized (Lock.getLock("no").getLock()) {
                             Process(1000 + x);
                         }
                     } else {
-                        if (lock.hasLock("no")) {
-                            synchronized (lock.getLock("no").getLock()) {
+                        if (Lock.hasLock("no")) {
+                            synchronized (Lock.getLock("no").getLock()) {
                                 Process(1000 + x);
-                                lock.AckLock("no");
+                                Lock.AckLock("no");
                             }
                         } else {
                             synchronized (sync) {

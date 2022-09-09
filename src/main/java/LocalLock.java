@@ -1,8 +1,8 @@
-public class locallock {
+public class LocalLock {
 
 
     private final LockObject obj;
-    public locallock(String key) {
+    public LocalLock(String key) {
         obj = new LockObject(key);
     }
 
