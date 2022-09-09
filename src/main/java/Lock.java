@@ -28,6 +28,8 @@ public class Lock {
     private static HashMap<String, LocalLock> map = new HashMap<>();
     private final static LocalLock sync = new LocalLock("public");
 
+    private final static Object publiclock = new Object();
+
     public static LocalLock getLock(String key) {
         if(!map.containsKey(key)) {
             map.put(key, new LocalLock(key));
@@ -36,6 +38,9 @@ public class Lock {
         return map.get(key);
     }
 
+    public static Object getPublicLock() {
+        return publiclock;
+    }
 
     public static Boolean hasLock(String key) {
         getLock(key);
